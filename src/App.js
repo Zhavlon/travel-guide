@@ -20,10 +20,12 @@ const App = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(coordinates, bounds);
-		getPlacesData().then(data => {
-			setPlaces(data);
-		});
+		if(bounds) {
+			getPlacesData(bounds.sw, bounds.ne).then(data => {
+				setPlaces(data);
+				console.log('places: ', places)
+			});
+		}
 	}, [coordinates, bounds]);
 
 	return (
