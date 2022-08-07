@@ -21,7 +21,7 @@ export const getPlacesData = async (sw, ne) => {
 		});
 
 		return data;
-	} catch (error) {
-		console.log("🚀 ~ file: index.js ~ line 27 ~ getPlacesData ~ error", error);
+	} catch (e) {
+		console.log(e);
 	}
 };
