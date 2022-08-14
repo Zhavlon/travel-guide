@@ -53,6 +53,7 @@ const Map = ({ coordinates, setBounds, setCoordinates, places }) => {
 										className={classes.pointer}
 										alt={place.name}
 									/>
+									<Rating size="small" value={Number(place.rating)} readOnly />
 								</Paper>
 							)}
 						</div>
