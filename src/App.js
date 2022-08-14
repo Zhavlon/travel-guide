@@ -9,6 +9,7 @@ import { getPlacesData } from "./api";
 
 const App = () => {
 	const [places, setPlaces] = useState([]);
+	const [filteredPlaces, setFilteredPlaces] = useState([]);
 	const [coordinates, setCoordinates] = useState({});
 	const [bounds, setBounds] = useState(null);
 
@@ -27,10 +28,17 @@ const App = () => {
 	}, []);
 
 	useEffect(() => {
+		const filteredPlaces = places.filter(place => place.rating > rating);
+
+		setFilteredPlaces(filteredPlaces);
+	}, [rating]);
+
+	useEffect(() => {
 		setIsLoading(true);
 		getPlacesData(type, bounds?.sw, bounds?.ne).then(data => {
 			setPlaces(data);
 			setIsLoading(false);
+			setFilteredPlaces([]);
 		});
 	}, [type, coordinates, bounds]);
 
@@ -47,7 +55,7 @@ const App = () => {
 						setRating={setRating}
 						isLoading={isLoading}
 						childClicked={childClicked}
-						places={places}
+						places={filteredPlaces.length ? filteredPlaces : places}
 					/>
 				</Grid>
 				<Grid item xs={12} md={8}>
@@ -55,7 +63,7 @@ const App = () => {
 						coordinates={coordinates}
 						setBounds={setBounds}
 						setCoordinates={setCoordinates}
-						places={places}
+						places={filteredPlaces.length ? filteredPlaces : places}
 						setChildClicked={setChildClicked}
 					/>
 				</Grid>
