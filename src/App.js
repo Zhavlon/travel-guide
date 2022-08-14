@@ -9,16 +9,16 @@ import { getPlacesData } from "./api";
 
 const App = () => {
 	const [places, setPlaces] = useState([]);
-	const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
-	const [bounds, setBounds] = useState({});
+	const [coordinates, setCoordinates] = useState({});
+	const [bounds, setBounds] = useState(null);
 
 	const [childClicked, setChildClicked] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
-			({ coords: { latitude: lat, longitude: lng } }) => {
-				setCoordinates({ lat, lng });
+			({ coords: { latitude, longitude } }) => {
+				setCoordinates({ lat: latitude, lng: longitude });
 			}
 		);
 	}, []);

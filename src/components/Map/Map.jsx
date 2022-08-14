@@ -14,7 +14,6 @@ const Map = ({
 }) => {
 	const classes = useStyles();
 	const isDesktop = useMediaQuery("(min-width: 600px)");
-	console.log("🚀 ~ file: Map.jsx ~ line 11 ~ Map ~ isDesktop", isDesktop);
 
 	return (
 		<div className={classes.mapContainer}>

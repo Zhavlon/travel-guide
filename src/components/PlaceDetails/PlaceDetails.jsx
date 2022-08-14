@@ -15,10 +15,6 @@ import Rating from "@material-ui/lab/Rating";
 import useStyles from "./styles";
 
 const PlaceDetails = ({ place, selected, refProp }) => {
-	console.log(
-		"🚀 ~ file: PlaceDetails.jsx ~ line 18 ~ PlaceDetails ~ selected",
-		selected
-	);
 	const classes = useStyles();
 
 	if (selected)
@@ -57,8 +53,9 @@ const PlaceDetails = ({ place, selected, refProp }) => {
 						{place.ranking}
 					</Typography>
 				</Box>
-				{place?.awards?.map(award => (
+				{place?.awards?.map((award, i) => (
 					<Box
+						key={i}
 						my={1}
 						display="flex"
 						justifyContent="space-between"
