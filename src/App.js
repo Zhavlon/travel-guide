@@ -11,7 +11,7 @@ const App = () => {
 	const [places, setPlaces] = useState([]);
 	const [filteredPlaces, setFilteredPlaces] = useState([]);
 	const [coordinates, setCoordinates] = useState({});
-	const [bounds, setBounds] = useState(null);
+	const [bounds, setBounds] = useState({});
 
 	const [childClicked, setChildClicked] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -34,19 +34,21 @@ const App = () => {
 	}, [rating]);
 
 	useEffect(() => {
-		setIsLoading(true);
-		getPlacesData(type, bounds?.sw, bounds?.ne).then(data => {
-			setPlaces(data);
-			setIsLoading(false);
-			setFilteredPlaces([]);
-		});
-	}, [type, coordinates, bounds]);
+		if (bounds?.sw && bounds?.ne) {
+			setIsLoading(true);
+			getPlacesData(type, bounds?.sw, bounds?.ne).then(data => {
+				setPlaces(data.filter(place => place.name && place.num_reviews > 0));
+				setIsLoading(false);
+				setFilteredPlaces([]);
+			});
+		}
+	}, [type, bounds]);
 
 	return (
 		<>
 			<CssBaseline />
-			<Header />
-			<Grid container spacing={3} style={{ width: "100%" }}>
+			<Header setCoordinates={setCoordinates} />
+			<Grid container spacing={2} style={{ width: "100%" }}>
 				<Grid item xs={12} md={4}>
 					<List
 						type={type}
