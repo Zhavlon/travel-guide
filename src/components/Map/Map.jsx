@@ -5,7 +5,13 @@ import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import Rating from "@material-ui/lab/Rating";
 import useStyles from "./styles";
 
-const Map = ({ coordinates, setBounds, setCoordinates, places }) => {
+const Map = ({
+	coordinates,
+	setBounds,
+	setCoordinates,
+	places,
+	setChildClicked,
+}) => {
 	const classes = useStyles();
 	const isDesktop = useMediaQuery("(min-width: 600px)");
 	console.log("🚀 ~ file: Map.jsx ~ line 11 ~ Map ~ isDesktop", isDesktop);
@@ -23,7 +29,7 @@ const Map = ({ coordinates, setBounds, setCoordinates, places }) => {
 					setCoordinates({ lat: e.center.lat, lng: e.center.lng });
 					setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
 				}}
-				// onChildClick={() => {}}
+				onChildClick={child => setChildClicked(child)}
 			>
 				{places?.length &&
 					places.map((place, i) => (
