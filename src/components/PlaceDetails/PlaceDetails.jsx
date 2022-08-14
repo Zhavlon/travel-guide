@@ -16,7 +16,6 @@ import useStyles from "./styles";
 
 const PlaceDetails = ({ place }) => {
 	const classes = useStyles();
-	console.log(place);
 
 	return (
 		<Card elevation={6}>

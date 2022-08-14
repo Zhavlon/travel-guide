@@ -30,7 +30,7 @@ const App = () => {
 		<>
 			<CssBaseline />
 			<Header />
-			<Grid container spaceing={3} style={{ width: "100%" }}>
+			<Grid container spacing={3} style={{ width: "100%" }}>
 				<Grid item xs={12} md={4}>
 					<List places={places} />
 				</Grid>
@@ -39,6 +39,7 @@ const App = () => {
 						coordinates={coordinates}
 						setBounds={setBounds}
 						setCoordinates={setCoordinates}
+						places={places}
 					/>
 				</Grid>
 			</Grid>
